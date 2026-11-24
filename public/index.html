@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympic Medals Explorer · 1896–2016</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2718%27 r=%2711%27 fill=%27%23f2c94c%27 stroke=%27%23b8860b%27 stroke-width=%273%27/%3E%3Cpath d=%27M9 1h6l3 7h-4zM23 1h-6l-3 7h4z%27 fill=%27%232c4178%27/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero" id="top">
+    <div class="flag-wall" id="flagWall" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="spotlight" aria-hidden="true"></div>
+    <div class="sparks" id="sparks" aria-hidden="true"></div>
+
+    <nav class="nav">
+      <div class="brand"><span class="brand-dot"></span>Olympic Medals Explorer</div>
+      <div class="nav-links">
+        <a href="#global">Global</a>
+        <a href="#south-asia">South Asia</a>
+        <a href="#profile">Country</a>
+        <a href="#rivalry">Head to Head</a>
+        <a href="#athletes">Athletes</a>
+        <a href="#global-more">Global Q&amp;A</a>
+        <a href="#matchday">Match Day</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 220 300" class="medal-svg">
+          <defs>
+            <linearGradient id="ribA" x1="0" x2="1">
+              <stop offset="0" stop-color="#1d2a4d"/><stop offset=".5" stop-color="#2c4178"/><stop offset="1" stop-color="#1d2a4d"/>
+            </linearGradient>
+            <linearGradient id="ribB" x1="0" x2="1">
+              <stop offset="0" stop-color="#7a5200"/><stop offset=".5" stop-color="#e8b931"/><stop offset="1" stop-color="#7a5200"/>
+            </linearGradient>
+            <radialGradient id="gold" cx="38%" cy="32%" r="75%">
+              <stop offset="0" stop-color="#fff3c4"/>
+              <stop offset=".35" stop-color="#f2c94c"/>
+              <stop offset=".75" stop-color="#b8860b"/>
+              <stop offset="1" stop-color="#6e4b00"/>
+            </radialGradient>
+            <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff0b0"/><stop offset=".5" stop-color="#9c6f00"/><stop offset="1" stop-color="#ffe08a"/>
+            </linearGradient>
+            <linearGradient id="shine" x1="0" x2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#fff" stop-opacity=".75"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="disc"><circle cx="110" cy="190" r="78"/></clipPath>
+            <path id="arc" d="M 52 190 A 58 58 0 0 1 168 190"/>
+          </defs>
+          <g class="swing">
+            <polygon points="62,0 100,0 122,118 92,128" fill="url(#ribA)"/>
+            <polygon points="158,0 120,0 98,118 128,128" fill="url(#ribB)"/>
+            <rect x="96" y="104" width="28" height="22" rx="4" fill="url(#rim)"/>
+            <circle cx="110" cy="190" r="84" fill="url(#rim)"/>
+            <circle cx="110" cy="190" r="78" fill="url(#gold)"/>
+            <circle cx="110" cy="190" r="64" fill="none" stroke="#8a6200" stroke-width="2" opacity=".55"/>
+            <circle cx="110" cy="190" r="70" fill="none" stroke="#fff4c8" stroke-width="1" opacity=".5" stroke-dasharray="2 5"/>
+            <path d="M110 150 l11 24 26 3 -19 18 5 26 -23 -13 -23 13 5 -26 -19 -18 26 -3z" fill="#fff6d6" opacity=".9"/>
+            <text font-family="Bebas Neue, Impact, sans-serif" font-size="15" letter-spacing="3" fill="#6e4b00">
+              <textPath href="#arc" startOffset="50%" text-anchor="middle">1896 · 2016</textPath>
+            </text>
+            <text x="110" y="246" text-anchor="middle" font-family="Bebas Neue, Impact, sans-serif" font-size="16" letter-spacing="4" fill="#6e4b00">120 YEARS</text>
+            <g clip-path="url(#disc)">
+              <rect class="shine-bar" x="-60" y="100" width="40" height="190" fill="url(#shine)" transform="rotate(20 110 190)"/>
+            </g>
+          </g>
+        </svg>
+        <div class="emblem-glow"></div>
+      </div>
+
+      <p class="eyebrow">PostgreSQL · 120 years of Olympic history</p>
+      <h1 class="title">Global Olympic <span class="gold-text">Medals</span> Database</h1>
+      <p class="subtitle">Every medal from Athens 1896 to Rio 2016, with a closer look at Pakistan and South Asia.</p>
+
+      <div class="stats" id="heroStats">
+        <div class="stat"><span class="stat-num" data-key="raw_records">0</span><span class="stat-label">Raw records</span></div>
+        <div class="stat"><span class="stat-num" data-key="medal_records">0</span><span class="stat-label">Clean medal records</span></div>
+        <div class="stat"><span class="stat-num" data-key="games">0</span><span class="stat-label">Olympic Games</span></div>
+        <div class="stat"><span class="stat-num" data-key="sports">0</span><span class="stat-label">Sports</span></div>
+        <div class="stat"><span class="stat-num" data-key="countries">0</span><span class="stat-label">Medal-winning nations</span></div>
+      </div>
+
+      <a href="#global" class="cta">Explore the data <span>↓</span></a>
+    </div>
+  </header>
+
+  <!-- ================= FILTER BAR ================= -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-inner">
+      <div class="f-group years">
+        <label>Years</label>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rangeFill"></div></div>
+          <input type="range" id="yearFrom" min="1896" max="2016" step="2" value="1896" aria-label="From year">
+          <input type="range" id="yearTo" min="1896" max="2016" step="2" value="2016" aria-label="To year">
+        </div>
+        <span class="range-val"><b id="fromVal">1896</b> – <b id="toVal">2016</b></span>
+      </div>
+
+      <div class="f-group">
+        <label>Season</label>
+        <div class="seg" id="seasonSeg" role="group" aria-label="Season">
+          <button data-v="All" class="on">All</button>
+          <button data-v="Summer">Summer</button>
+          <button data-v="Winter">Winter</button>
+        </div>
+      </div>
+
+      <div class="f-group">
+        <label>Medals</label>
+        <div class="chips" id="medalChips" role="group" aria-label="Medal types">
+          <button data-v="Gold" class="chip on"><i class="dot gold"></i>Gold</button>
+          <button data-v="Silver" class="chip on"><i class="dot silver"></i>Silver</button>
+          <button data-v="Bronze" class="chip on"><i class="dot bronze"></i>Bronze</button>
+        </div>
+      </div>
+
+      <button class="reset" id="resetBtn">Reset</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= GLOBAL ================= -->
+    <section id="global" class="section reveal">
+      <div class="section-head">
+        <p class="kicker">01 · Global leaders</p>
+        <h2>Who has won the most?</h2>
+        <p class="lead">The top nations by medals for the years, season and medal types you picked. Team medals count once.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Top 10 nations</h3><p class="muted" id="globalNote">All Games, 1896–2016</p></div>
+          <span class="qchip">Query D6</span>
+        </div>
+        <div class="chart-box tall"><canvas id="topChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ================= SOUTH ASIA ================= -->
+    <section id="south-asia" class="section reveal">
+      <div class="section-head">
+        <p class="kicker">02 · South Asia</p>
+        <h2>The South Asian medal table</h2>
+        <p class="lead">All eight South Asian nations, including those that have never won a medal.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Medal table</h3><p class="muted">Ranked by total medals</p></div>
+          <span class="qchip">Query D1</span>
+        </div>
+        <div class="table-wrap">
+          <table class="medal-table" id="saTable">
+            <thead><tr><th>#</th><th>Country</th><th class="num">Gold</th><th class="num">Silver</th><th class="num">Bronze</th><th class="num">Total</th><th class="bar-col">Share of South Asia's medals</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COUNTRY PROFILE ================= -->
+    <section id="profile" class="section reveal">
+      <div class="section-head row">
+        <div>
+          <p class="kicker">03 · Country profile</p>
+          <h2 class="profile-title"><span id="profileFlag" class="flag-badge"></span><span id="profileName">Pakistan</span></h2>
+        </div>
+        <div class="select-wrap">
+          <label for="countrySelect">Choose a country</label>
+          <select id="countrySelect"></select>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis">
+        <div class="kpi"><span class="kpi-label"><i class="dot gold"></i>Gold</span><span class="kpi-num" id="kGold">0</span></div>
+        <div class="kpi"><span class="kpi-label"><i class="dot silver"></i>Silver</span><span class="kpi-num" id="kSilver">0</span></div>
+        <div class="kpi"><span class="kpi-label"><i class="dot bronze"></i>Bronze</span><span class="kpi-num" id="kBronze">0</span></div>
+        <div class="kpi accent"><span class="kpi-label">Total medals</span><span class="kpi-num" id="kTotal">0</span></div>
+        <div class="kpi"><span class="kpi-label">Best sport</span><span class="kpi-num small" id="kSport">–</span></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Medals by sport</h3><p class="muted">Top sports for this country</p></div>
+            <span class="qchip">Query D2</span>
+          </div>
+          <div class="chart-box"><canvas id="sportChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Medals by Olympic year</h3><p class="muted">Every Games in the selected range</p></div>
+            <span class="qchip">Query D5</span>
+          </div>
+          <div class="chart-box"><canvas id="timelineChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Athletes sent to each Games</h3><p class="muted">Every athlete, not only medal winners</p></div>
+          <span class="qchip">Query D3</span>
+        </div>
+        <div class="chart-box"><canvas id="athleteChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ================= HEAD TO HEAD ================= -->
+    <section id="rivalry" class="section reveal">
+      <div class="section-head row">
+        <div>
+          <p class="kicker">04 · Head to head</p>
+          <h2>Compare two nations</h2>
+        </div>
+        <div class="vs-wrap">
+          <select id="cmpA" aria-label="First country"></select>
+          <span class="vs">VS</span>
+          <select id="cmpB" aria-label="Second country"></select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Medals per Olympic year</h3><p class="muted" id="cmpNote"></p></div>
+          <span class="qchip">Query D5</span>
+        </div>
+        <div class="score" id="cmpScore"></div>
+        <div class="chart-box"><canvas id="cmpChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ================= ATHLETES ================= -->
+    <section id="athletes" class="section reveal">
+      <div class="section-head">
+        <p class="kicker">05 · Athletes</p>
+        <h2>Most Olympic appearances: <span id="lbCountry" class="gold-text">Pakistan</span></h2>
+        <p class="lead">Athletes who represented this country at the most Games. Change the country in section 03.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Leaderboard</h3><p class="muted">Number of different Games attended</p></div>
+          <span class="qchip">Query D4</span>
+        </div>
+        <ol class="leaderboard" id="leaderboard"></ol>
+      </div>
+    </section>
+
+            <section id="global-more" class="section reveal">
+      <div class="section-head">
+        <p class="kicker">06 · Global questions</p>
+        <h2>The whole world, by the numbers</h2>
+        <p class="lead">Questions D7 to D9 look at every country. The filters at the top work here too.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Who leads each major sport?</h3><p class="muted">Country with the most medals in each sport</p></div>
+          <span class="qchip">Query D7</span>
+        </div>
+        <div class="chart-box tall"><canvas id="sportsChart"></canvas></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h3>How many countries win medals?</h3><p class="muted">Medal-winning countries per Olympic year</p></div>
+          <span class="qchip">Query D8</span>
+        </div>
+        <div class="chart-box"><canvas id="growthChart"></canvas></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h3>Women among medal winners</h3><p class="muted">Share of medal-winning athletes who are women, by decade</p></div>
+          <span class="qchip">Query D9</span>
+        </div>
+        <div class="chart-box"><canvas id="womenChart"></canvas></div>
+      </div>
+    </section>
+
+        <section id="matchday" class="section reveal">
+      <div class="section-head">
+        <p class="kicker">06 · Match day</p>
+        <h2>Did they win? Hear the crowd.</h2>
+        <p class="lead">Pick a country and a year. If the country won at least one medal that year, the stadium cheers. If not, the crowd groans.</p>
+      </div>
+      <div class="card stadium" id="stadium">
+        <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="confetti" id="confetti" aria-hidden="true"></div>
+        <div class="md-controls">
+          <div class="select-wrap"><label for="mdCountry">Country</label><select id="mdCountry"></select></div>
+          <div class="select-wrap"><label for="mdYear">Olympic year</label><select id="mdYear"></select></div>
+          <button class="md-btn" id="mdReplay" type="button">Replay</button>
+          <button class="md-btn ghost" id="mdMute" type="button">Sound: on</button>
+        </div>
+        <div class="scoreboard">
+          <div class="sb-team" id="sbTeam"></div>
+          <div class="sb-verdict" id="sbVerdict">PICK A TEAM</div>
+          <div class="sb-sub" id="sbSub">Choose a country and a year above.</div>
+          <div class="sb-medals">
+            <div><i class="dot gold"></i><b id="sbG">0</b> Gold</div>
+            <div><i class="dot silver"></i><b id="sbS">0</b> Silver</div>
+            <div><i class="dot bronze"></i><b id="sbB">0</b> Bronze</div>
+          </div>
+          <div class="md-test">
+            <button class="md-btn ghost small" id="testCheer" type="button">Test cheer</button>
+            <button class="md-btn ghost small" id="testGroan" type="button">Test groan</button>
+          </div>
+        </div>
+        <div class="pitch" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><b>Global Olympic Medals Database: 120 Years of Winners (1896–2016)</b></p>
+    <p class="muted">Raheel Amir (BSEDS_24040) · Mujtaba Ahsan (BSEDS_24033) · Built on PostgreSQL, Node.js and Chart.js</p>
+    <p class="muted small">Data: 120 years of Olympic history (athlete_events.csv, noc_regions.csv). Medal counts come from our database and may differ slightly from official records.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/vendor/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
