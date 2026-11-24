@@ -7,13 +7,20 @@ const path = require('path');
 const express = require('express');
 const { Pool } = require('pg');
 
-const pool = new Pool({
-  host: process.env.PGHOST || 'localhost',
-  port: Number(process.env.PGPORT || 5432),
-  user: process.env.PGUSER || 'postgres',
-  password: process.env.PGPASSWORD || '',
-  database: process.env.PGDATABASE || 'postgres',
-});
+const pool = process.env.DATABASE_URL
+  ? new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+      max: 5,
+      connectionTimeoutMillis: 10000,
+    })
+  : new Pool({
+      host: process.env.PGHOST || 'localhost',
+      port: Number(process.env.PGPORT || 5432),
+      user: process.env.PGUSER || 'postgres',
+      password: process.env.PGPASSWORD || '',
+      database: process.env.PGDATABASE || 'postgres',
+    });
 
 const S = 'olympics_learning';
 const app = express();
@@ -270,14 +277,19 @@ app.get('/api/women', route(async (req) => {
     ORDER BY decade`, [f.from, f.to, f.season, f.medals]);
 }));
 
-const PORT = Number(process.env.PORT || 3000);
-app.listen(PORT, async () => {
-  try {
-    await pool.query('SELECT 1');
-    console.log(`Database connected (${pool.options.database} on port ${pool.options.port}).`);
-  } catch (e) {
-    console.log('Could NOT connect to the database: ' + e.message);
-    console.log('Check the values in your .env file.');
-  }
-  console.log(`Open http://localhost:${PORT} in your browser.`);
-});
+if (require.main === module) {
+  const PORT = Number(process.env.PORT || 3000);
+
+  app.listen(PORT, async () => {
+    try {
+      await pool.query('SELECT 1');
+      console.log('Database connected successfully.');
+    } catch (e) {
+      console.log('Database connection failed: ' + e.message);
+    }
+
+    console.log(`Open http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
